@@ -10,7 +10,7 @@ resource "azurerm_logic_app_action_http" "logic_app_action_https" {
   queries      = each.value.queries
 
   dynamic "run_after" {
-    for_each = each.value.run_after != null ? [each.value.run_after] : []
+    for_each = each.value.run_after != null ? each.value.run_after : []
     content {
       action_name   = run_after.value.action_name
       action_result = run_after.value.action_result

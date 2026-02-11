@@ -23,10 +23,18 @@ EOT
     body         = optional(string)
     headers      = optional(map(string))
     queries      = optional(map(string))
-    run_after = optional(object({
+    run_after = optional(list(object({
       action_name   = string
       action_result = string
-    }))
+    })))
   }))
+  validation {
+    condition = alltrue([
+      for k, v in var.logic_app_action_https : (
+        v.run_after == null || (length(v.run_after) >= 1)
+      )
+    ])
+    error_message = "Each run_after list must contain at least 1 items"
+  }
 }
 
