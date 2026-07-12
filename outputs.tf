@@ -1,3 +1,7 @@
+output "logic_app_action_https_id" {
+  description = "Map of id values across all logic_app_action_https, keyed the same as var.logic_app_action_https"
+  value       = { for k, v in azurerm_logic_app_action_http.logic_app_action_https : k => v.id }
+}
 output "logic_app_action_https_body" {
   description = "Map of body values across all logic_app_action_https, keyed the same as var.logic_app_action_https"
   value       = { for k, v in azurerm_logic_app_action_http.logic_app_action_https : k => v.body }
