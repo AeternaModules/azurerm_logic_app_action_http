@@ -28,14 +28,6 @@ EOT
       action_result = string
     })))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.logic_app_action_https : (
-        v.run_after == null || (length(v.run_after) >= 1)
-      )
-    ])
-    error_message = "Each run_after list must contain at least 1 items"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_logic_app_action_http's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
